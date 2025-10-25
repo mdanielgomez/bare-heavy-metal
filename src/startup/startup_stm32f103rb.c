@@ -114,4 +114,7 @@ void Reset_Handler(void)
         *b = 0;
     }
     main();
+    while (1)
+    {
+    };
 }

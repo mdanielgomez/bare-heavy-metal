@@ -32,23 +32,17 @@ __attribute__((weak, alias("Default_Handler"))) void SysTickHandler(void);
 __attribute__((section(".isr_vector"))) void (*const vector_table[])(void) = {
 
     // core handlers
-    (void (*)(void))(&_estack),
-    Reset_Handler,
-    NMI_Handler,
-    HardFault_Handler,
-    MemManage_Handler,
-    BusFault_Handler,
-    UsageFault_Handler,
-    0,
-    0,
-    0,
-    0,
-    SVC_Handler,
-    DebugMon_Handler,
-    0,
-    PendSV_Handler,
-    SysTickHandler
+    (void (*)(void))(&_estack), Reset_Handler, NMI_Handler, HardFault_Handler, MemManage_Handler,
+    BusFault_Handler, UsageFault_Handler, 0, 0, 0, 0, SVC_Handler, DebugMon_Handler, 0,
+    PendSV_Handler, SysTickHandler,
 
     // STM IRQs
-
-};
+    Default_Handler, Default_Handler, Default_Handler, Default_Handler, Default_Handler,
+    Default_Handler, Default_Handler, Default_Handler, Default_Handler, Default_Handler,
+    Default_Handler, Default_Handler, Default_Handler, Default_Handler, Default_Handler,
+    Default_Handler, Default_Handler, Default_Handler, Default_Handler, Default_Handler,
+    Default_Handler, Default_Handler, Default_Handler, Default_Handler, Default_Handler,
+    Default_Handler, Default_Handler, Default_Handler, Default_Handler, Default_Handler,
+    Default_Handler, Default_Handler, Default_Handler, Default_Handler, Default_Handler,
+    Default_Handler, Default_Handler, Default_Handler, Default_Handler, Default_Handler,
+    Default_Handler, Default_Handler, Default_Handler};

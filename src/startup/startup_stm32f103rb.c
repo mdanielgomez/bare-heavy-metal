@@ -94,4 +94,6 @@ __attribute__((section(".isr_vector"))) void (*const vector_table[])(void) = {
     Default_Handler,
     Default_Handler
 };
-// clang-format off
+// clang-format on
+
+void Reset_Handler(void) {}

@@ -5,6 +5,8 @@ extern uint32_t _estack;
 extern uint32_t _sidata, _sdata, _edata;
 extern uint32_t _sbss, _ebss;
 
+extern int main();
+
 void Reset_Handler(void);
 
 __attribute__((noreturn)) void Default_Handler(void)

@@ -25,7 +25,7 @@ __attribute__((weak, alias("Default_Handler"))) void UsageFault_Handler(void);
 __attribute__((weak, alias("Default_Handler"))) void SVC_Handler(void);
 __attribute__((weak, alias("Default_Handler"))) void DebugMon_Handler(void);
 __attribute__((weak, alias("Default_Handler"))) void PendSV_Handler(void);
-__attribute__((weak, alias("Default_Handler"))) void SysTickHandler(void);
+__attribute__((weak, alias("Default_Handler"))) void SysTick_Handler(void);
 
 // stm IRQs
 // will add later
@@ -49,7 +49,7 @@ __attribute__((section(".isr_vector"))) void (*const vector_table[])(void) = {
     DebugMon_Handler,
     0,
     PendSV_Handler,
-    SysTickHandler,
+    SysTick_Handler,
 
     // STM IRQs
     Default_Handler,

@@ -16,6 +16,6 @@ int main(void)
     GPIOA->CRL |= 0b0010 << 20;
 
     // Turn on LED
-    GPIOA->ODR = 1 << 5;
+    GPIOA->BSRR = 1 << 5;
     return 0;
 }

@@ -1,13 +1,33 @@
-CC = arm-none-eabi-gcc
-CFLAGS = -mcpu=cortex-m3 -mthumb -O0 -ffreestanding -nostdlib -ISTM32CubeF1/Drivers/CMSIS/Include -ISTM32CubeF1/Drivers/CMSIS/Device/ST/STM32F1xx/Include
+CC := arm-none-eabi-gcc
+OBJCOPY := arm-none-eabi-objcopy
+CFLAGS = -mcpu=cortex-m3 -mthumb -O0 -ffreestanding -nostdlib -g
 LDSCRIPT = linker/stm32f103rb.ld
+TARGET := blink
 
-all: blink.elf
+SRCS := \
+	$(wildcard src/startup/*.c) \
+	$(wildcard src/*.c) 	
 
-blink.elf: src/startup/startup_stm32f103rb.c src/main.c $(LDSCRIPT)
-	$(CC) $(CFLAGS) -T$(LDSCRIPT) src/startup/startup_stm32f103rb.c	src/main.c -o $@
+OBJS := $(SRCS:.c=.o)
 
 
-clean: rm -f blink.elf
+all: $(TARGET).elf $(TARGET).bin $(TARGET).hex
+
+# Compile to .o files
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Link .o to .elf
+$(TARGET).elf: $(OBJS) $(LDSCRIPT)
+	$(CC) $(CFLAGS) -T$(LDSCRIPT) -Wl,-Map=$(TARGET).map,--cref $(OBJS) -o $@
+
+# Convert elf to bin	
+$(TARGET).bin: $(TARGET).elf
+	$(OBJCOPY) -O binary $< $@
+
+$(TARGET).hex: $(TARGET).elf
+	$(OBJCOPY) -O ihex $< $@
+clean: 
+	rm -f $(OBJS) $(TARGET).elf $(TARGET).bin $(TARGET).map $(TARGET).hex
 
 .PHONY: all clean

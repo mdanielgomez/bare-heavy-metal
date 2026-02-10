@@ -1,5 +1,6 @@
 #define RCC_BASE 0x40021000UL
 #define GPIOA_BASE 0x40010800UL
+#define TIM2_BASE 0x40000000UL
 
 typedef struct
 {
@@ -28,5 +29,32 @@ typedef struct
     volatile unsigned int LCKR;
 } GPIO_TypeDef;
 
+typedef struct
+{
+    volatile unsigned int CR1;
+    volatile unsigned int CR2;
+    volatile unsigned int SMCR;
+    volatile unsigned int DIER;
+    volatile unsigned int SR;
+    volatile unsigned int EGR;
+    volatile unsigned int CCMR1O;
+    volatile unsigned int CCNR1I;
+    volatile unsigned int CCMR2O;
+    volatile unsigned int CCMR2I;
+    volatile unsigned int CCER;
+    volatile unsigned int CNT;
+    volatile unsigned int PSC;
+    volatile unsigned int ARR;
+    volatile unsigned int RES;
+    volatile unsigned int CCR1;
+    volatile unsigned int CCR2;
+    volatile unsigned int CCR3;
+    volatile unsigned int CCR4;
+    volatile unsigned int RES2;
+    volatile unsigned int DCR;
+    volatile unsigned int DMAR;
+} TIM2_TypeDef;
+
 #define RCC ((RCC_TypeDef*)RCC_BASE)
 #define GPIOA ((GPIO_TypeDef*)GPIOA_BASE)
+#define TIM2 ((TIM2_TypeDef*)TIM2_BASE)

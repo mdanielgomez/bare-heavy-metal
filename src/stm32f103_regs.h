@@ -37,10 +37,8 @@ typedef struct
     volatile unsigned int DIER;
     volatile unsigned int SR;
     volatile unsigned int EGR;
-    volatile unsigned int CCMR1O;
-    volatile unsigned int CCNR1I;
-    volatile unsigned int CCMR2O;
-    volatile unsigned int CCMR2I;
+    volatile unsigned int CCMR1;
+    volatile unsigned int CCMR2;
     volatile unsigned int CCER;
     volatile unsigned int CNT;
     volatile unsigned int PSC;

@@ -1,4 +1,14 @@
 #include "stm32f103_regs.h"
+#include "arm.h"
+
+void TIM2_IRQHandler()
+{
+    if (TIM2->SR & 1u)
+    {
+        TIM2->SR &= ~1u;
+        GPIOA->ODR ^= (1 << 5);
+    }
+}
 
 int main(void)
 {
@@ -7,6 +17,10 @@ int main(void)
 
     // Disable the timer
     TIM2->CR1 &= ~1;
+
+    // Enable the interrupt
+    TIM2->DIER |= 1;
+    NVIC->ISER[0] |= 1 << 28;
 
     // Set the prescalar and auto reload
     TIM2->PSC = 8000u - 1u; // 8MHz / 8000 = 1 kHz (1 ms per tick)
@@ -35,11 +49,6 @@ int main(void)
     // Turn on LED with timer
     while (1)
     {
-        while ((TIM2->SR & 1u) == 0)
-        {
-        }
-        TIM2->SR &= ~1u;
-        GPIOA->ODR ^= (1 << 5);
     }
     return 0;
 }

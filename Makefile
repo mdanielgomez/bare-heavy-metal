@@ -1,3 +1,6 @@
+ELF := blink.elf
+OPENOCD_CFG := -f interface/stlink.cfg -f target/stm32f1x.cfg
+
 CC := arm-none-eabi-gcc
 OBJCOPY := arm-none-eabi-objcopy
 CFLAGS = -mcpu=cortex-m3 -mthumb -O0 -ffreestanding -nostdlib -g
@@ -30,4 +33,10 @@ $(TARGET).hex: $(TARGET).elf
 clean: 
 	rm -f $(OBJS) $(TARGET).elf $(TARGET).bin $(TARGET).map $(TARGET).hex
 
-.PHONY: all clean
+openocd:
+	openocd $(OPENOCD_CFG)
+
+debug:
+	gdb-multiarch $(ELF) -x debug.gdb
+
+.PHONY: all clean openocd debug

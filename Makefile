@@ -34,7 +34,7 @@ $(TARGET).bin: $(TARGET).elf
 $(TARGET).hex: $(TARGET).elf
 	$(OBJCOPY) -O ihex $< $@
 clean: 
-	rm -f $(OBJS) $(TARGET).elf $(TARGET).bin $(TARGET).map $(TARGET).hex
+	$(MAKE) -C bootloader clean
 
 openocd:
 	openocd $(OPENOCD_CFG)

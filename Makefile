@@ -14,14 +14,10 @@ SRCS := \
 OBJS := $(SRCS:.c=.o)
 
 
-all: $(TARGET).elf $(TARGET).bin $(TARGET).hex
+all: bootloader
 
 bootloader:
 	$(MAKE) -C bootloader
-
-# Compile to .o files
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
 
 # Link .o to .elf
 $(TARGET).elf: $(OBJS) $(LDSCRIPT)

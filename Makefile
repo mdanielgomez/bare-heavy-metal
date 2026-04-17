@@ -16,6 +16,9 @@ OBJS := $(SRCS:.c=.o)
 
 all: $(TARGET).elf $(TARGET).bin $(TARGET).hex
 
+bootloader:
+	$(MAKE) -C bootloader
+
 # Compile to .o files
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -39,4 +42,4 @@ openocd:
 debug:
 	gdb-multiarch $(ELF) -x debug.gdb
 
-.PHONY: all clean openocd debug
+.PHONY: all clean openocd debug bootloader

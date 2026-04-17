@@ -27,12 +27,6 @@ bootloader:
 $(TARGET).elf: $(OBJS) $(LDSCRIPT)
 	$(CC) $(CFLAGS) -T$(LDSCRIPT) -Wl,-Map=$(TARGET).map,--cref $(OBJS) -o $@
 
-# Convert elf to bin	
-$(TARGET).bin: $(TARGET).elf
-	$(OBJCOPY) -O binary $< $@
-
-$(TARGET).hex: $(TARGET).elf
-	$(OBJCOPY) -O ihex $< $@
 clean: 
 	$(MAKE) -C bootloader clean
 

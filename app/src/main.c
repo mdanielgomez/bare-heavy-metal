@@ -1,4 +1,4 @@
-#include "stm32f103_regs.h"
+#include "stm32f103.h"
 #include "arm.h"
 
 void TIM2_IRQHandler()

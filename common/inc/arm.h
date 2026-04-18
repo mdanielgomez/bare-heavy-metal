@@ -1,4 +1,5 @@
 #define NVIC_BASE 0xE000E100
+#define VTOR_REG 0xE000ED08
 
 typedef struct
 {
@@ -8,3 +9,4 @@ typedef struct
 } NVIC_TypeDef;
 
 #define NVIC ((NVIC_TypeDef*)NVIC_BASE)
+#define VTOR (*(volatile unsigned int*)VTOR_REG)

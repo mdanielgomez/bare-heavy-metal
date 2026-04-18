@@ -8,7 +8,10 @@ static inline void set_msp(uint32_t app_sp)
 {
     asm volatile("msr msp, %0" ::"r"(app_sp) :);
 }
-
+static inline void disable_IRQ(void)
+{
+    asm volatile("cpsid i");
+}
 void jump_to_app(void)
 {
     uint32_t app_sp    = *(volatile uint32_t*)APP_BASE;
@@ -16,6 +19,7 @@ void jump_to_app(void)
 
     pFunction app_entry = (pFunction)app_reset;
 
+    disable_IRQ();
     VTOR = APP_BASE;
 
     set_msp(app_sp);

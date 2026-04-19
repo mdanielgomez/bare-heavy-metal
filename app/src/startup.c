@@ -111,6 +111,10 @@ void Reset_Handler(void)
     {
         *b = 0;
     }
+
+    // re-enable interrupts due to bootloader disabling them
+    asm volatile("cpsie i");
+
     main();
     while (1)
     {

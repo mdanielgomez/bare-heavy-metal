@@ -2,6 +2,7 @@
 #define GPIOA_BASE 0x40010800UL
 #define TIM2_BASE 0x40000000UL
 #define DMA_BASE 0x40020000UL
+#define USART2_BASE 0x40004400UL
 
 typedef struct
 {
@@ -96,7 +97,19 @@ typedef struct
 
 } DMA_TypeDef;
 
+typedef struct
+{
+    volatile unsigned int SR;
+    volatile unsigned int DR;
+    volatile unsigned int BRR;
+    volatile unsigned int CR1;
+    volatile unsigned int CR2;
+    volatile unsigned int CR3;
+    volatile unsigned int GTPR;
+} USART_TypeDef;
+
 #define RCC ((RCC_TypeDef*)RCC_BASE)
 #define GPIOA ((GPIO_TypeDef*)GPIOA_BASE)
 #define TIM2 ((TIM2_TypeDef*)TIM2_BASE)
 #define DMA ((DMA_TypeDef*)DMA_BASE)
+#define USART2 ((USART_TypeDef*)USART2_BASE)

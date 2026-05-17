@@ -1,5 +1,11 @@
 OPENOCD_CFG := -f interface/stlink.cfg -f target/stm32f1x.cfg
 
+ifeq ($(OS),Windows_NT)
+    GDB := arm-none-eabi-gdb
+else
+    GDB := gdb-multiarch
+endif
+
 all: bootloader app
 
 bootloader:
@@ -20,6 +26,6 @@ openocd:
 	openocd $(OPENOCD_CFG)
 
 debug:
-	gdb-multiarch $(ELF) -x debug.gdb
+	$(GDB) $(ELF) -x debug.gdb
 
 .PHONY: all clean openocd debug bootloader app

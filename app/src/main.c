@@ -15,6 +15,29 @@ int main(void)
     // Enable TIM2 Peripheral
     RCC->APB1ENR |= 1 << 0;
 
+    // Enable GPIOA, USART, and DMA Clock
+    RCC->APB2ENR |= 1 << 2;
+    RCC->APB1ENR |= 1 << 17;
+    RCC->AHBENR |= 1 << 0;
+
+    // Configure PA2 and PA3
+    GPIOA->CRL &= ~(0b1111 << 8); // Reset GPIOA2
+    GPIOA->CRL |= (0b1010 << 8); // AF Push Pull, Output mode max 2 MHz
+
+    GPIOA->CRL &= ~(0b1111 << 12); // Reset GPIOA3
+    GPIOA->CRL |= (0b0001 << 12); // Floating input mode
+
+    // Set Baud
+    USART2->BRR = (4 << 4) | 5;
+    USART2->CR1 = 0;
+    USART2->CR1 |= (1 << 3);
+    USART2->CR1 |= (1 << 2);
+    USART2->CR1 |= (1 << 13);
+
+    volatile uint8_t uart_rx_buffer[64];
+
+    // Set up DMA
+
     // Disable the timer
     TIM2->CR1 &= ~1;
 

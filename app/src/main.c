@@ -1,6 +1,8 @@
 #include "stm32f103.h"
 #include "arm.h"
 
+#define UART_RX_BUFFER_SIZE 64
+
 void TIM2_IRQHandler()
 {
     if (TIM2->SR & 1u)
@@ -37,6 +39,20 @@ int main(void)
     volatile uint8_t uart_rx_buffer[64];
 
     // Set up DMA
+    DMA1->CCR1 &= ~(1 << 0);
+    DMA1->CPAR1 = &USART2->DR;
+    DMA1->CMAR1 = uart_rx_buffer;
+    DMA1->CNDTR1 = UART_RX_BUFFER_SIZE;
+
+    DMA1->CCR1 = 0;
+    DMA1->CCR1 |= (1 << 7);
+    DMA1->CCR1 |= (1 << 5);
+
+    // Enable DMA on USART2
+    USART2->CR3 |= (1 << 6);
+
+    // Enable DMA
+    DMA1->CCR1 |= 1;
 
     // Disable the timer
     TIM2->CR1 &= ~1;

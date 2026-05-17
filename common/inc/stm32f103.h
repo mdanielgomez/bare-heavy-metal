@@ -1,7 +1,9 @@
+#include <stdint.h>
+
 #define RCC_BASE 0x40021000UL
 #define GPIOA_BASE 0x40010800UL
 #define TIM2_BASE 0x40000000UL
-#define DMA_BASE 0x40020000UL
+#define DMA1_BASE 0x40020000UL
 #define USART2_BASE 0x40004400UL
 
 typedef struct
@@ -95,7 +97,7 @@ typedef struct
     volatile unsigned int CMAR7;
     volatile unsigned int RES7;
 
-} DMA_TypeDef;
+} DMA1_TypeDef;
 
 typedef struct
 {
@@ -111,5 +113,5 @@ typedef struct
 #define RCC ((RCC_TypeDef*)RCC_BASE)
 #define GPIOA ((GPIO_TypeDef*)GPIOA_BASE)
 #define TIM2 ((TIM2_TypeDef*)TIM2_BASE)
-#define DMA ((DMA_TypeDef*)DMA_BASE)
+#define DMA1 ((DMA1_TypeDef*)DMA1_BASE)
 #define USART2 ((USART_TypeDef*)USART2_BASE)

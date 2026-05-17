@@ -40,8 +40,8 @@ int main(void)
 
     // Set up DMA
     DMA1->CCR1 &= ~(1 << 0);
-    DMA1->CPAR1 = &USART2->DR;
-    DMA1->CMAR1 = uart_rx_buffer;
+    DMA1->CPAR1 = (uint32_t)&USART2->DR;
+    DMA1->CMAR1 = (uint32_t)uart_rx_buffer;
     DMA1->CNDTR1 = UART_RX_BUFFER_SIZE;
 
     DMA1->CCR1 = 0;

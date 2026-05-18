@@ -25,7 +25,7 @@ clean:
 openocd:
 	openocd $(OPENOCD_CFG)
 
-debug:
-	$(GDB) $(ELF) -x debug.gdb
+debug_app:
+	$(GDB) app/app.elf -x debug.gdb
 
 .PHONY: all clean openocd debug bootloader app

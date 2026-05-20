@@ -34,6 +34,37 @@ void clock_init_72mhz_pclk1_36mhz(void){
     while (((RCC->CFGR >> 2) & 0b11) != 0b10) { }
 }
 
+static volatile uint8_t uart_rx_buffer[64];
+
+void uart_write_char(char c)
+{
+    while (!(USART2->SR & (1 << 7))) {
+        // wait for TXE
+    }
+
+    USART2->DR = c;
+}
+
+void uart_poll_rx(void)
+{
+    static uint32_t old_pos = 0;
+
+    uint32_t new_pos = UART_RX_BUFFER_SIZE - DMA1->CNDTR6;
+
+    while (old_pos != new_pos)
+    {
+        uint8_t byte = uart_rx_buffer[old_pos];
+
+        // Do something with byte
+        // For now, maybe echo it later using TX
+        uart_write_char(byte);
+
+        old_pos++;
+        if (old_pos >= UART_RX_BUFFER_SIZE)
+            old_pos = 0;
+    }
+}
+
 int main(void)
 {
     clock_init_72mhz_pclk1_36mhz();
@@ -59,7 +90,7 @@ int main(void)
     USART2->CR1 |= (1 << 2);
     USART2->CR1 |= (1 << 13);
 
-    volatile uint8_t uart_rx_buffer[64];
+    
 
     // Set up DMA
     DMA1->CCR6 &= ~(1 << 0);
@@ -111,6 +142,7 @@ int main(void)
     // Turn on LED with timer
     while (1)
     {
+        uart_poll_rx();
     }
     return 0;
 }

@@ -5,6 +5,7 @@
 #define TIM2_BASE 0x40000000UL
 #define DMA1_BASE 0x40020000UL
 #define USART2_BASE 0x40004400UL
+#define FLASH_ACR_BASE 0x40022000UL
 
 typedef struct
 {
@@ -96,7 +97,6 @@ typedef struct
     volatile unsigned int CPAR7;
     volatile unsigned int CMAR7;
     volatile unsigned int RES7;
-
 } DMA1_TypeDef;
 
 typedef struct
@@ -110,8 +110,10 @@ typedef struct
     volatile unsigned int GTPR;
 } USART_TypeDef;
 
+
 #define RCC ((RCC_TypeDef*)RCC_BASE)
 #define GPIOA ((GPIO_TypeDef*)GPIOA_BASE)
 #define TIM2 ((TIM2_TypeDef*)TIM2_BASE)
 #define DMA1 ((DMA1_TypeDef*)DMA1_BASE)
 #define USART2 ((USART_TypeDef*)USART2_BASE)
+#define FLASH_ACR (*(volatile uint32_t*)FLASH_ACR_BASE)

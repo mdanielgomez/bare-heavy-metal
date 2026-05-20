@@ -27,7 +27,7 @@ int main(void)
     GPIOA->CRL |= (0b1010 << 8); // AF Push Pull, Output mode max 2 MHz
 
     GPIOA->CRL &= ~(0b1111 << 12); // Reset GPIOA3
-    GPIOA->CRL |= (0b0001 << 12); // Floating input mode
+    GPIOA->CRL |= (0b0100 << 12); // Floating input mode
 
     // Set Baud
     USART2->BRR = (4 << 4) | 5;

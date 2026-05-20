@@ -12,8 +12,31 @@ void TIM2_IRQHandler()
     }
 }
 
+void clock_init_72mhz_pclk1_36mhz(void){
+    RCC->CR |= (1 << 16);
+    while (!(RCC->CR & (1 << 17))){}
+
+    FLASH_ACR |= (2 << 0);
+    FLASH_ACR |= (1 << 4);
+
+    RCC->CFGR &= ~((0xF << 4) | (0x7 << 8) | (0x7 << 11) |
+                  (1 << 16) | (0xF << 18));
+    RCC->CFGR |= (0b100 << 8);
+    RCC->CFGR |= (1 << 16);
+    RCC->CFGR |= (0b0111 << 18);
+
+    RCC->CR |= (1 << 24);
+    while (!(RCC->CR & (1 << 25))) { } // wait PLLRDY
+
+    RCC->CFGR &= ~(0b11 << 0);
+    RCC->CFGR |= (0b10 << 0);
+
+    while (((RCC->CFGR >> 2) & 0b11) != 0b10) { }
+}
+
 int main(void)
 {
+    clock_init_72mhz_pclk1_36mhz();
     // Enable TIM2 Peripheral
     RCC->APB1ENR |= 1 << 0;
 

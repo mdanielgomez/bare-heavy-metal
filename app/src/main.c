@@ -132,7 +132,7 @@ int main(void)
 
     // Configure GPIOA5
     // Reset PA5
-    GPIOA->CRL = 0x44444444;
+    //GPIOA->CRL = 0x44444444;
 
     // Set PA5 configuration to open-drain
     // Set PA5 mode to output 2 MHz max

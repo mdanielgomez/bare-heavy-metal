@@ -53,7 +53,7 @@ int main(void)
     GPIOA->CRL |= (0b0100 << 12); // Floating input mode
 
     // Set Baud
-    USART2->BRR = (4 << 4) | 5;
+    USART2->BRR = 0xEA6;
     USART2->CR1 = 0;
     USART2->CR1 |= (1 << 3);
     USART2->CR1 |= (1 << 2);

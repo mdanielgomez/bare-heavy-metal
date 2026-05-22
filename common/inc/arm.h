@@ -5,9 +5,9 @@
 
 typedef struct
 {
-    volatile unsigned int ISER[8];
-    volatile unsigned int reserved[24];
-    volatile unsigned int ICER[8];
+    volatile uint32_t ISER[8];
+    volatile uint32_t reserved[24];
+    volatile uint32_t ICER[8];
 } NVIC_TypeDef;
 
 #define NVIC ((NVIC_TypeDef*)NVIC_BASE)

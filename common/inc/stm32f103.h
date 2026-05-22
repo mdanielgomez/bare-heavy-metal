@@ -9,105 +9,105 @@
 
 typedef struct
 {
-    volatile unsigned int CR;
-    volatile unsigned int CFGR;
-    volatile unsigned int CIR;
-    volatile unsigned int APB2RSTR;
-    volatile unsigned int APB1RSTR;
-    volatile unsigned int AHBENR;
-    volatile unsigned int APB2ENR;
-    volatile unsigned int APB1ENR;
-    volatile unsigned int BDCR;
-    volatile unsigned int CSR;
-    volatile unsigned int AHBSTR;
-    volatile unsigned int CFGR2;
+    volatile uint32_t CR;
+    volatile uint32_t CFGR;
+    volatile uint32_t CIR;
+    volatile uint32_t APB2RSTR;
+    volatile uint32_t APB1RSTR;
+    volatile uint32_t AHBENR;
+    volatile uint32_t APB2ENR;
+    volatile uint32_t APB1ENR;
+    volatile uint32_t BDCR;
+    volatile uint32_t CSR;
+    volatile uint32_t AHBSTR;
+    volatile uint32_t CFGR2;
 } RCC_TypeDef;
 
 typedef struct
 {
-    volatile unsigned int CRL;
-    volatile unsigned int CRH;
-    volatile unsigned int IDR;
-    volatile unsigned int ODR;
-    volatile unsigned int BSRR;
-    volatile unsigned int BRR;
-    volatile unsigned int LCKR;
+    volatile uint32_t CRL;
+    volatile uint32_t CRH;
+    volatile uint32_t IDR;
+    volatile uint32_t ODR;
+    volatile uint32_t BSRR;
+    volatile uint32_t BRR;
+    volatile uint32_t LCKR;
 } GPIO_TypeDef;
 
 typedef struct
 {
-    volatile unsigned int CR1;
-    volatile unsigned int CR2;
-    volatile unsigned int SMCR;
-    volatile unsigned int DIER;
-    volatile unsigned int SR;
-    volatile unsigned int EGR;
-    volatile unsigned int CCMR1;
-    volatile unsigned int CCMR2;
-    volatile unsigned int CCER;
-    volatile unsigned int CNT;
-    volatile unsigned int PSC;
-    volatile unsigned int ARR;
-    volatile unsigned int RES;
-    volatile unsigned int CCR1;
-    volatile unsigned int CCR2;
-    volatile unsigned int CCR3;
-    volatile unsigned int CCR4;
-    volatile unsigned int RES2;
-    volatile unsigned int DCR;
-    volatile unsigned int DMAR;
+    volatile uint32_t CR1;
+    volatile uint32_t CR2;
+    volatile uint32_t SMCR;
+    volatile uint32_t DIER;
+    volatile uint32_t SR;
+    volatile uint32_t EGR;
+    volatile uint32_t CCMR1;
+    volatile uint32_t CCMR2;
+    volatile uint32_t CCER;
+    volatile uint32_t CNT;
+    volatile uint32_t PSC;
+    volatile uint32_t ARR;
+    volatile uint32_t RES;
+    volatile uint32_t CCR1;
+    volatile uint32_t CCR2;
+    volatile uint32_t CCR3;
+    volatile uint32_t CCR4;
+    volatile uint32_t RES2;
+    volatile uint32_t DCR;
+    volatile uint32_t DMAR;
 } TIM2_TypeDef;
 
 typedef struct
 {
-    volatile unsigned int ISR;
-    volatile unsigned int IFCR;
-    volatile unsigned int CCR1;
-    volatile unsigned int CNDTR1;
-    volatile unsigned int CPAR1;
-    volatile unsigned int CMAR1;
-    volatile unsigned int RES1;
-    volatile unsigned int CCR2;
-    volatile unsigned int CNDTR2;
-    volatile unsigned int CPAR2;
-    volatile unsigned int CMAR2;
-    volatile unsigned int RES2;
-    volatile unsigned int CCR3;
-    volatile unsigned int CNDTR3;
-    volatile unsigned int CPAR3;
-    volatile unsigned int CMAR3;
-    volatile unsigned int RES3;
-    volatile unsigned int CCR4;
-    volatile unsigned int CNDTR4;
-    volatile unsigned int CPAR4;
-    volatile unsigned int CMAR4;
-    volatile unsigned int RES4;
-    volatile unsigned int CCR5;
-    volatile unsigned int CNDTR5;
-    volatile unsigned int CPAR5;
-    volatile unsigned int CMAR5;
-    volatile unsigned int RES5;
-    volatile unsigned int CCR6;
-    volatile unsigned int CNDTR6;
-    volatile unsigned int CPAR6;
-    volatile unsigned int CMAR6;
-    volatile unsigned int RES6;
-    volatile unsigned int CCR7;
-    volatile unsigned int CNDTR7;
-    volatile unsigned int CPAR7;
-    volatile unsigned int CMAR7;
-    volatile unsigned int RES7;
+    volatile uint32_t ISR;
+    volatile uint32_t IFCR;
+    volatile uint32_t CCR1;
+    volatile uint32_t CNDTR1;
+    volatile uint32_t CPAR1;
+    volatile uint32_t CMAR1;
+    volatile uint32_t RES1;
+    volatile uint32_t CCR2;
+    volatile uint32_t CNDTR2;
+    volatile uint32_t CPAR2;
+    volatile uint32_t CMAR2;
+    volatile uint32_t RES2;
+    volatile uint32_t CCR3;
+    volatile uint32_t CNDTR3;
+    volatile uint32_t CPAR3;
+    volatile uint32_t CMAR3;
+    volatile uint32_t RES3;
+    volatile uint32_t CCR4;
+    volatile uint32_t CNDTR4;
+    volatile uint32_t CPAR4;
+    volatile uint32_t CMAR4;
+    volatile uint32_t RES4;
+    volatile uint32_t CCR5;
+    volatile uint32_t CNDTR5;
+    volatile uint32_t CPAR5;
+    volatile uint32_t CMAR5;
+    volatile uint32_t RES5;
+    volatile uint32_t CCR6;
+    volatile uint32_t CNDTR6;
+    volatile uint32_t CPAR6;
+    volatile uint32_t CMAR6;
+    volatile uint32_t RES6;
+    volatile uint32_t CCR7;
+    volatile uint32_t CNDTR7;
+    volatile uint32_t CPAR7;
+    volatile uint32_t CMAR7;
+    volatile uint32_t RES7;
 } DMA1_TypeDef;
 
 typedef struct
 {
-    volatile unsigned int SR;
-    volatile unsigned int DR;
-    volatile unsigned int BRR;
-    volatile unsigned int CR1;
-    volatile unsigned int CR2;
-    volatile unsigned int CR3;
-    volatile unsigned int GTPR;
+    volatile uint32_t SR;
+    volatile uint32_t DR;
+    volatile uint32_t BRR;
+    volatile uint32_t CR1;
+    volatile uint32_t CR2;
+    volatile uint32_t CR3;
+    volatile uint32_t GTPR;
 } USART_TypeDef;
 
 

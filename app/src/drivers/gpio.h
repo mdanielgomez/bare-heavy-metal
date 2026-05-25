@@ -21,5 +21,9 @@ typedef enum {
   GPIO_CNF_INPUT_PULL = 2
 } gpio_cnf_t;
 
+void gpio_configure_pin(GPIO_TypeDef* gpio, uint8_t pin, gpio_mode_t mode, gpio_cnf_t cnf);
+void gpio_write_pin(GPIO_TypeDef* gpio, uint8_t pin, uint8_t value);
+uint8_t gpio_read_pin(GPIO_TypeDef* gpio, uint8_t pin);
+void gpio_toggle_pin(GPIO_TypeDef* gpio, uint8_t pin);
 
 #endif

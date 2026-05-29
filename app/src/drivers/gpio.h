@@ -1,5 +1,4 @@
-#ifndef GPIO_H
-#define GPIO_H
+#pragma once
 
 #include "stm32f103.h"
 
@@ -25,5 +24,3 @@ void gpio_configure_pin(GPIO_TypeDef* gpio, uint8_t pin, gpio_mode_t mode, gpio_
 void gpio_write_pin(GPIO_TypeDef* gpio, uint8_t pin, uint8_t value);
 uint8_t gpio_read_pin(GPIO_TypeDef* gpio, uint8_t pin);
 void gpio_toggle_pin(GPIO_TypeDef* gpio, uint8_t pin);
-
-#endif

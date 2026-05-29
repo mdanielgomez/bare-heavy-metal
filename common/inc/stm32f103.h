@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stdint.h>
 
 #define RCC_BASE 0x40021000UL

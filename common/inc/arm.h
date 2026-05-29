@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stdint.h>
 
 #define NVIC_BASE 0xE000E100

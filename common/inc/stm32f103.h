@@ -58,7 +58,7 @@ typedef struct
     volatile uint32_t RES2;
     volatile uint32_t DCR;
     volatile uint32_t DMAR;
-} TIM2_TypeDef;
+} TIM_TypeDef;
 
 typedef struct
 {
@@ -114,7 +114,7 @@ typedef struct
 
 #define RCC ((RCC_TypeDef*)RCC_BASE)
 #define GPIOA ((GPIO_TypeDef*)GPIOA_BASE)
-#define TIM2 ((TIM2_TypeDef*)TIM2_BASE)
+#define TIM2 ((TIM_TypeDef*)TIM2_BASE)
 #define DMA1 ((DMA1_TypeDef*)DMA1_BASE)
 #define USART2 ((USART_TypeDef*)USART2_BASE)
 #define FLASH_ACR (*(volatile uint32_t*)FLASH_ACR_BASE)

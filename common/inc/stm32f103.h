@@ -112,7 +112,6 @@ typedef struct
     volatile uint32_t GTPR;
 } USART_TypeDef;
 
-
 #define RCC ((RCC_TypeDef*)RCC_BASE)
 #define GPIOA ((GPIO_TypeDef*)GPIOA_BASE)
 #define TIM2 ((TIM2_TypeDef*)TIM2_BASE)

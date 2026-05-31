@@ -12,33 +12,40 @@ void TIM2_IRQHandler()
     }
 }
 
-void clock_init_72mhz_pclk1_36mhz(void){
+void clock_init_72mhz_pclk1_36mhz(void)
+{
     RCC->CR |= (1 << 16);
-    while (!(RCC->CR & (1 << 17))){}
+    while (!(RCC->CR & (1 << 17)))
+    {
+    }
 
     FLASH_ACR |= (2 << 0);
     FLASH_ACR |= (1 << 4);
 
-    RCC->CFGR &= ~((0xF << 4) | (0x7 << 8) | (0x7 << 11) |
-                  (1 << 16) | (0xF << 18));
+    RCC->CFGR &= ~((0xF << 4) | (0x7 << 8) | (0x7 << 11) | (1 << 16) | (0xF << 18));
     RCC->CFGR |= (0b100 << 8);
     RCC->CFGR |= (1 << 16);
     RCC->CFGR |= (0b0111 << 18);
 
     RCC->CR |= (1 << 24);
-    while (!(RCC->CR & (1 << 25))) { } // wait PLLRDY
+    while (!(RCC->CR & (1 << 25)))
+    {
+    } // wait PLLRDY
 
     RCC->CFGR &= ~(0b11 << 0);
     RCC->CFGR |= (0b10 << 0);
 
-    while (((RCC->CFGR >> 2) & 0b11) != 0b10) { }
+    while (((RCC->CFGR >> 2) & 0b11) != 0b10)
+    {
+    }
 }
 
 static volatile uint8_t uart_rx_buffer[64];
 
 void uart_write_char(char c)
 {
-    while (!(USART2->SR & (1 << 7))) {
+    while (!(USART2->SR & (1 << 7)))
+    {
         // wait for TXE
     }
 
@@ -78,10 +85,10 @@ int main(void)
 
     // Configure PA2 and PA3
     GPIOA->CRL &= ~(0b1111 << 8); // Reset GPIOA2
-    GPIOA->CRL |= (0b1010 << 8); // AF Push Pull, Output mode max 2 MHz
+    GPIOA->CRL |= (0b1010 << 8);  // AF Push Pull, Output mode max 2 MHz
 
     GPIOA->CRL &= ~(0b1111 << 12); // Reset GPIOA3
-    GPIOA->CRL |= (0b0100 << 12); // Floating input mode
+    GPIOA->CRL |= (0b0100 << 12);  // Floating input mode
 
     // Set Baud
     USART2->BRR = 0xEA6;
@@ -90,12 +97,10 @@ int main(void)
     USART2->CR1 |= (1 << 2);
     USART2->CR1 |= (1 << 13);
 
-    
-
     // Set up DMA
     DMA1->CCR6 &= ~(1 << 0);
-    DMA1->CPAR6 = (uint32_t)&USART2->DR;
-    DMA1->CMAR6 = (uint32_t)uart_rx_buffer;
+    DMA1->CPAR6  = (uint32_t)&USART2->DR;
+    DMA1->CMAR6  = (uint32_t)uart_rx_buffer;
     DMA1->CNDTR6 = UART_RX_BUFFER_SIZE;
 
     DMA1->CCR6 = 0;
@@ -132,7 +137,7 @@ int main(void)
 
     // Configure GPIOA5
     // Reset PA5
-    //GPIOA->CRL = 0x44444444;
+    // GPIOA->CRL = 0x44444444;
 
     // Set PA5 configuration to open-drain
     // Set PA5 mode to output 2 MHz max

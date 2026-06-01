@@ -64,42 +64,16 @@ typedef struct
 {
     volatile uint32_t ISR;
     volatile uint32_t IFCR;
-    volatile uint32_t CCR1;
-    volatile uint32_t CNDTR1;
-    volatile uint32_t CPAR1;
-    volatile uint32_t CMAR1;
-    volatile uint32_t RES1;
-    volatile uint32_t CCR2;
-    volatile uint32_t CNDTR2;
-    volatile uint32_t CPAR2;
-    volatile uint32_t CMAR2;
-    volatile uint32_t RES2;
-    volatile uint32_t CCR3;
-    volatile uint32_t CNDTR3;
-    volatile uint32_t CPAR3;
-    volatile uint32_t CMAR3;
-    volatile uint32_t RES3;
-    volatile uint32_t CCR4;
-    volatile uint32_t CNDTR4;
-    volatile uint32_t CPAR4;
-    volatile uint32_t CMAR4;
-    volatile uint32_t RES4;
-    volatile uint32_t CCR5;
-    volatile uint32_t CNDTR5;
-    volatile uint32_t CPAR5;
-    volatile uint32_t CMAR5;
-    volatile uint32_t RES5;
-    volatile uint32_t CCR6;
-    volatile uint32_t CNDTR6;
-    volatile uint32_t CPAR6;
-    volatile uint32_t CMAR6;
-    volatile uint32_t RES6;
-    volatile uint32_t CCR7;
-    volatile uint32_t CNDTR7;
-    volatile uint32_t CPAR7;
-    volatile uint32_t CMAR7;
-    volatile uint32_t RES7;
-} DMA1_TypeDef;
+} DMA_TypeDef;
+
+typedef struct
+{
+    volatile uint32_t CCR;
+    volatile uint32_t CNDTR;
+    volatile uint32_t CPAR;
+    volatile uint32_t CMAR;
+    volatile uint32_t RES
+} DMA_Channel_Typedef;
 
 typedef struct
 {
@@ -115,6 +89,6 @@ typedef struct
 #define RCC ((RCC_TypeDef*)RCC_BASE)
 #define GPIOA ((GPIO_TypeDef*)GPIOA_BASE)
 #define TIM2 ((TIM_TypeDef*)TIM2_BASE)
-#define DMA1 ((DMA1_TypeDef*)DMA1_BASE)
+#define DMA1 ((DMA_TypeDef*)DMA1_BASE)
 #define USART2 ((USART_TypeDef*)USART2_BASE)
 #define FLASH_ACR (*(volatile uint32_t*)FLASH_ACR_BASE)

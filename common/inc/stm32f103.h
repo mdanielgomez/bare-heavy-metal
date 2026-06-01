@@ -73,7 +73,7 @@ typedef struct
     volatile uint32_t CPAR;
     volatile uint32_t CMAR;
     volatile uint32_t RES
-} DMA_Channel_Typedef;
+} DMA_Channel_TypeDef;
 
 typedef enum
 {

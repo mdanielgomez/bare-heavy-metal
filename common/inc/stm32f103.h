@@ -75,6 +75,17 @@ typedef struct
     volatile uint32_t RES
 } DMA_Channel_Typedef;
 
+typedef enum
+{
+    DMA_CHANNEL_1 = 0,
+    DMA_CHANNEL_2,
+    DMA_CHANNEL_3,
+    DMA_CHANNEL_4,
+    DMA_CHANNEL_5,
+    DMA_CHANNEL_6,
+    DMA_CHANNEL_7
+} dma_channel_num_t;
+
 typedef struct
 {
     volatile uint32_t SR;

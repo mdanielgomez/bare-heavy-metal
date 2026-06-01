@@ -12,7 +12,7 @@ void gpio_configure_pin(GPIO_TypeDef* gpio, uint8_t pin, gpio_mode_t mode, gpio_
     else
     {
         config_register = &gpio->CRH;
-        pin_offset      = (pin - 8) * 4
+        pin_offset      = (pin - 8) * 4;
     }
 
     uint32_t register_setting = ((cnf << 2) | mode) << pin_offset;

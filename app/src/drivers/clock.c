@@ -1,5 +1,6 @@
 #include "clock.h"
 #include "stm32f103.h"
+#include "rcc.h"
 
 void clock_init_72mhz(void)
 {
@@ -32,4 +33,7 @@ void clock_init_72mhz(void)
     } // wait for sysclock to be ready
 }
 
-uint32_t clock_get_sysclk_hz(void);
+uint32_t clock_get_sysclk_hz(void)
+{
+    switch (RCC->CFGR)
+}

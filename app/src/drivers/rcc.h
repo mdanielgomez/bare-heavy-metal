@@ -27,12 +27,21 @@ typedef enum
 
 typedef enum
 {
-    RCC_PLL_MULT_4 = 0b0010,
-    RCC_PLL_MULT_5 = 0b0011,
-    RCC_PLL_MULT_6 = 0b0100,
-    RCC_PLL_MULT_7 = 0b0101,
-    RCC_PLL_MULT_8 = 0b0110,
-    RCC_PLL_MULT_9 = 0b0111
+    RCC_PLL_MULT_2  = 0b0000,
+    RCC_PLL_MULT_3  = 0b0001,
+    RCC_PLL_MULT_4  = 0b0010,
+    RCC_PLL_MULT_5  = 0b0011,
+    RCC_PLL_MULT_6  = 0b0100,
+    RCC_PLL_MULT_7  = 0b0101,
+    RCC_PLL_MULT_8  = 0b0110,
+    RCC_PLL_MULT_9  = 0b0111,
+    RCC_PLL_MULT_10 = 0b1000,
+    RCC_PLL_MULT_11 = 0b1001,
+    RCC_PLL_MULT_12 = 0b1010,
+    RCC_PLL_MULT_13 = 0b1011,
+    RCC_PLL_MULT_14 = 0b1100,
+    RCC_PLL_MULT_15 = 0b1101,
+    RCC_PLL_MULT_16 = 0b1110
 } rcc_pll_mult_t;
 
 typedef enum

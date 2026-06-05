@@ -33,6 +33,21 @@ void clock_init_72mhz(void)
     } // wait for sysclock to be ready
 }
 
+static uint32_t clock_get_pll_output_hz()
+{
+    uint32_t pll_entry_freq;
+    if ((RCC->CFGR & RCC_PLL_ENTRY_MASK) >> RCC_PLL_ENTRY_POS)
+    {
+        // assume prediv1 is set to 0
+        pll_entry_freq = 8000000;
+    }
+    else
+    {
+        pll_entry_freq = 4000000; // clk freq is hsi/2
+    }
+    return pll_entry_freq *
+           ((RCC->CFGR & RCC_PLL_MULT_MASK) + 2); // scale pll entry to get pll output
+}
 uint32_t clock_get_sysclk_hz(void)
 {
     switch (RCC->CFGR)

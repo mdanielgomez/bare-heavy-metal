@@ -12,6 +12,12 @@
 
 typedef enum
 {
+    RCC_PLL_ENTRY_HSI = 0,
+    RCC_PLL_PREDIV1   = 1
+} rcc_pll_entry_t;
+
+typedef enum
+{
     RCC_APB1PRE_NOT_DIVIDED = 0b000,
     RCC_APB1PRE_DIV_2       = 0b100,
     RCC_APB1PRE_DIV_4       = 0b101,

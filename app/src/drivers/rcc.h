@@ -1,5 +1,15 @@
 #pragma once
 
+#define RCC_CFGR_SW_POS 0
+#define RCC_CFGR_SW_MASK 0b11 << RCC_CFGR_SW_POS
+#define RCC_CFGR_SWS_POS 2
+#define RCC_CFGR_SWS_MASK 0b11 << RCC_CFGR_SWS_POS
+
+#define RCC_PLL_ENTRY_POS 16u
+#define RCC_PLL_ENTRY_MASK 1u << RCC_PLL_ENTRY_POS
+#define RCC_PLL_MULT_POS 18u
+#define RCC_PLL_MULT_MASK 1u << RCC_PLL_MULT_POS
+
 typedef enum
 {
     RCC_APB1PRE_NOT_DIVIDED = 0b000,

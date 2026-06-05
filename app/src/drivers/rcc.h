@@ -24,7 +24,7 @@ typedef enum
     SYSCLK_SET_HSI = 0b00,
     SYSCLK_SET_HSE = 0b01,
     SYSCLK_SET_PLL = 0b10
-} sysclk_set_t;
+} rcc_sysclk_set_t;
 
 void rcc_enable_gpioa(void);
 void rcc_enable_tim2(void);

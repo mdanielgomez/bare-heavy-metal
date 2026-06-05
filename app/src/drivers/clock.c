@@ -2,6 +2,9 @@
 #include "stm32f103.h"
 #include "rcc.h"
 
+static const uint32_t HSI_FREQ_HZ = 8000000;
+static const uint32_t HSE_FREQ_HZ = 8000000; // from nucleo board.
+
 void clock_init_72mhz(void)
 {
     // Set hclock to 72MHz, APB1 clock to 36 MHz
@@ -50,5 +53,16 @@ static uint32_t clock_get_pll_output_hz()
 }
 uint32_t clock_get_sysclk_hz(void)
 {
-    switch (RCC->CFGR)
+    uint32_t sys_clk_freq;
+    switch ((RCC->CFGR & RCC_CFGR_SWS_MASK) >> RCC_CFGR_SWS_POS)
+    {
+    case SYSCLK_SET_HSI:
+        return HSI_FREQ_HZ;
+        break;
+    case SYSCLK_SET_HSE:
+        return HSE_FREQ_HZ;
+        break;
+    case SYSCLK_SET_PLL:
+        return clock_get_pll_output_hz();
+    }
 }

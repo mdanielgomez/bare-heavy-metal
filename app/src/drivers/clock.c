@@ -41,8 +41,7 @@ static uint32_t clock_get_pll_output_hz()
     uint32_t pll_entry_freq;
     if ((RCC->CFGR & RCC_PLL_ENTRY_MASK) >> RCC_PLL_ENTRY_POS)
     {
-        // assume prediv1 is set to 0
-        pll_entry_freq = 8000000;
+        pll_entry_freq = HSE_FREQ_HZ;
     }
     else
     {

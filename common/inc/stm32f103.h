@@ -97,6 +97,13 @@ typedef struct
     volatile uint32_t GTPR;
 } USART_TypeDef;
 
+typedef enum
+{
+    FLASH_LATENCY_0 = 0b000,
+    FLASH_LATENCY_1 = 0b001,
+    FLASH_LATENCY_2 = 0b010
+} flash_latency_t;
+
 #define RCC ((RCC_TypeDef*)RCC_BASE)
 #define GPIOA ((GPIO_TypeDef*)GPIOA_BASE)
 #define TIM2 ((TIM_TypeDef*)TIM2_BASE)

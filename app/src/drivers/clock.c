@@ -19,13 +19,13 @@ void clock_init_72mhz(void)
                    (0xF << 18));           // clear bits, set ahb prescalr to no division
     RCC->CFGR |= (RCC_APB1PRE_DIV_2 << 8); // set low speed prescalar to /2
     RCC->CFGR |= (1 << 16);                // set hse as pll source
-    RCC->CFGR |= (RCC_PLL_MULT_9 << 18);   // set pll multiplication to x9
-    RCC->CR |= (1 << 24);                  // enable PLL
+    RCC->CFGR |= (RCC_PLL_MULT_9 << RCC_PLL_MULT_POS); // set pll multiplication to x9
+    RCC->CR |= (1 << 24);                              // enable PLL
     while (!(RCC->CR & (1 << 25)))
     {
     } // wait PLLRDY
 
-    RCC->CFGR &= ~(0b11 << 0);          // clear bits
+    RCC->CFGR &= ~(RCC_CFGR_SW_MASK);   // clear bits
     RCC->CFGR |= (SYSCLK_SET_PLL << 0); // set PLL as source for sysclock
 
     while (((RCC->CFGR >> 2) & 0b11) != 0b10)

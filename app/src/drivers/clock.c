@@ -65,3 +65,19 @@ uint32_t clock_get_sysclk_hz(void)
         return clock_get_pll_output_hz();
     }
 }
+uint32_t clock_get_hclk_hz(void)
+{
+    uint32_t sysclk = clock_get_sysclk_hz();
+    uint32_t hpre   = ((RCC->CFGR & RCC_CFGR_HPRE_MASK) >> RCC_CFGR_HPRE_POS);
+    if (hpre < 8u)
+    {
+        return sysclk; // no division
+    }
+    uint32_t exponent = hpre - 7u;
+    if (hpre >= 12)
+    {
+        exponent++; // adjust for prescaler skipping 32 as a value
+    }
+    uint32_t prescaler = 1u << exponent;
+    return sysclk / prescaler;
+}

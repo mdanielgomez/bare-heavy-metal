@@ -64,12 +64,12 @@ typedef enum
 
 typedef enum
 {
-    RCC_PPRE1_NO_DIV = 0b000,
-    RCC_PPRE1_DIV_2  = 0b100,
-    RCC_PPRE1_DIV_4  = 0b101,
-    RCC_PPRE1_DIV_8  = 0b110,
-    RCC_PPRE1_DIV_16 = 0b111
-} rcc_ppre1_t;
+    RCC_PPRE_NO_DIV = 0b000,
+    RCC_PPRE_DIV_2  = 0b100,
+    RCC_PPRE_DIV_4  = 0b101,
+    RCC_PPRE_DIV_8  = 0b110,
+    RCC_PPRE_DIV_16 = 0b111
+} rcc_ppre_t;
 
 typedef enum
 {

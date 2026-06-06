@@ -12,6 +12,8 @@
 
 #define RCC_CFGR_HPRE_POS 4u
 #define RCC_CFGR_HPRE_MASK 0b1111 << RCC_CFGR_HPRE_POS
+#define RCC_CFGR_PPRE1_POS 8u
+#define RCC_CFGR_PPRE1_MASK 0b111 << RCC_CFGR_PPRE1_POS
 
 typedef enum
 {
@@ -59,6 +61,15 @@ typedef enum
     RCC_HPRE_DIV_256 = 0b1110,
     RCC_HPRE_DIV_512 = 0b1111
 } rcc_hpre_prescalar_t;
+
+typedef enum
+{
+    RCC_PPRE1_NO_DIV = 0b000,
+    RCC_PPRE1_DIV_2  = 0b100,
+    RCC_PPRE1_DIV_4  = 0b101,
+    RCC_PPRE1_DIV_8  = 0b110,
+    RCC_PPRE1_DIV_16 = 0b111
+} rcc_ppre1_t;
 
 typedef enum
 {

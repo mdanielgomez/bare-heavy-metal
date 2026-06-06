@@ -93,3 +93,15 @@ uint32_t clock_get_pclk1_hz()
     uint32_t prescaler = 1u << exponent;
     return hclk / prescaler;
 }
+uint32_t clock_get_pclk2_hz()
+{
+    uint32_t hclk = clock_get_hclk_hz();
+    uint32_t ppre = (RCC->CFGR & RCC_CFGR_PPRE2_MASK) >> RCC_CFGR_PPRE2_POS;
+    if (ppre < 4u)
+    {
+        return hclk; // no division
+    }
+    uint32_t exponent  = ppre - 3;
+    uint32_t prescaler = 1u << exponent;
+    return hclk / prescaler;
+}

@@ -10,6 +10,9 @@
 #define RCC_PLL_MULT_POS 18u
 #define RCC_PLL_MULT_MASK 1u << RCC_PLL_MULT_POS
 
+#define RCC_CFGR_HPRE_POS 4u
+#define RCC_CFGR_HPRE_MASK 0b1111 << RCC_CFGR_HPRE_POS
+
 typedef enum
 {
     RCC_PLL_ENTRY_HSI = 0,
@@ -43,6 +46,19 @@ typedef enum
     RCC_PLL_MULT_15 = 0b1101,
     RCC_PLL_MULT_16 = 0b1110
 } rcc_pll_mult_t;
+
+typedef enum
+{
+    RCC_HPRE_NO_DIV  = 0b0000,
+    RCC_HPRE_DIV_2   = 0b1000,
+    RCC_HPRE_DIV_4   = 0b1001,
+    RCC_HPRE_DIV_8   = 0b1010,
+    RCC_HPRE_DIV_16  = 0b1011,
+    RCC_HPRE_DIV_64  = 0b1100,
+    RCC_HPRE_DIV_128 = 0b1101,
+    RCC_HPRE_DIV_256 = 0b1110,
+    RCC_HPRE_DIV_512 = 0b1111
+} rcc_hpre_prescalar_t;
 
 typedef enum
 {

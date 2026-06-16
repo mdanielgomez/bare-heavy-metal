@@ -6,6 +6,7 @@
 #define GPIOA_BASE 0x40010800UL
 #define TIM2_BASE 0x40000000UL
 #define DMA1_BASE 0x40020000UL
+#define USART1_BASE 0x40013800UL
 #define USART2_BASE 0x40004400UL
 #define FLASH_ACR_BASE 0x40022000UL
 
@@ -106,5 +107,6 @@ typedef enum
 #define GPIOA ((GPIO_TypeDef*)GPIOA_BASE)
 #define TIM2 ((TIM_TypeDef*)TIM2_BASE)
 #define DMA1 ((DMA_TypeDef*)DMA1_BASE)
+#define USART1 ((USART_TypeDef*)USART1_BASE)
 #define USART2 ((USART_TypeDef*)USART2_BASE)
 #define FLASH_ACR (*(volatile uint32_t*)FLASH_ACR_BASE)

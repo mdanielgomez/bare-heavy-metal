@@ -39,6 +39,27 @@ typedef struct
     uart_mode_t   mode;
 } uart_config_t;
 
+typedef struct
+{
+    USART_TypeDef* uart;
+    uart_config_t  config;
+
+    GPIO_TypeDef* rx_gpio;
+    uint8_t       rx_gpio_pin;
+
+    GPIO_TypeDef* tx_gpio;
+    uint8_t       tx_gpio_pin;
+
+    uint8_t* rx_buffer;
+    uint16_t rx_buffer_size;
+    uint16_t rx_read_index;
+
+    uint8_t*          tx_buffer;
+    uint16_t          tx_buffer_size;
+    volatile uint16_t tx_head;
+    volatile uint16_t tx_tail;
+} uart_handle_t;
+
 void uart_set_baud_rate(USART_TypeDef* uart, uint32_t brr);
 void uart_enable_transmit(USART_TypeDef* uart);
 void uart_enable_receiver(USART_TypeDef* uart);
@@ -46,4 +67,4 @@ void uart_enable_uart(USART_TypeDef* uart);
 void uart_enable_dma(USART_TypeDef* uart);
 
 void uart_write_char(USART_TypeDef* uart, char c);
-void uart_init(USART_TypeDef* uart, uart_config_t config);
+void uart_init(uart_handle_t* handle);

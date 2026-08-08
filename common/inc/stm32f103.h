@@ -8,6 +8,7 @@
 #define DMA1_BASE 0x40020000UL
 #define USART1_BASE 0x40013800UL
 #define USART2_BASE 0x40004400UL
+#define USART3_BASE 0x40004800UL
 #define FLASH_ACR_BASE 0x40022000UL
 
 typedef struct
@@ -109,4 +110,5 @@ typedef enum
 #define DMA1 ((DMA_TypeDef*)DMA1_BASE)
 #define USART1 ((USART_TypeDef*)USART1_BASE)
 #define USART2 ((USART_TypeDef*)USART2_BASE)
+#define USART3 ((USART_TypeDef*)USART3_BASE)
 #define FLASH_ACR (*(volatile uint32_t*)FLASH_ACR_BASE)

@@ -47,8 +47,8 @@ static uint32_t clock_get_pll_output_hz()
     {
         pll_entry_freq = HSI_FREQ_HZ / 2; // clk freq is hsi/2
     }
-    return pll_entry_freq *
-           ((RCC->CFGR & RCC_PLL_MULT_MASK) + 2); // scale pll entry to get pll output
+    uint32_t multiplier = ((RCC->CFGR & RCC_PLL_MULT_MASK) >> RCC_PLL_MULT_POS) + 2u;
+    return pll_entry_freq * multiplier;
 }
 uint32_t clock_get_sysclk_hz(void)
 {

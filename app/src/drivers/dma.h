@@ -6,6 +6,8 @@
 #define DMA_CCR_MINC_POS 7
 #define DMA_CCR_PINC_POS 6
 #define DMA_CCR_CIRC_POS 5
+#define DMA_CCR_DIR_POS 4
+#define DMA_CCR_TCIE_POS 1
 
 typedef enum
 {
@@ -25,6 +27,12 @@ typedef enum
     DMA_CIRC_ENABLED
 } dma_circ_t;
 
+typedef enum
+{
+    DMA_DIRECTION_PERIPHERAL_TO_MEMORY,
+    DMA_DIRECTION_MEMORY_TO_PERIPHERAL
+} dma_direction_t;
+
 typedef struct
 {
     DMA_TypeDef* dma;
@@ -35,6 +43,8 @@ typedef struct
     dma_minc_t   memory_inc_mode;
     dma_pinc_t   peripheral_inc_mode;
     dma_circ_t   circular_inc_mode;
+    dma_direction_t direction;
+    uint8_t        transfer_complete_interrupt;
 } dma_channel_config_t;
 
 void dma_channel_enable(DMA_TypeDef* dma, dma_channel_num_t channel);

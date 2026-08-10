@@ -47,17 +47,9 @@ typedef struct
     uint8_t         transfer_complete_interrupt;
 } dma_channel_config_t;
 
-void dma_channel_enable(DMA_TypeDef* dma, dma_channel_num_t channel);
-void dma_channel_disable(DMA_TypeDef* dma, dma_channel_num_t channel);
-void dma_enable_circular_mode(DMA_TypeDef* dma, dma_channel_num_t channel);
-void dma_disable_circular_mode(DMA_TypeDef* dma, dma_channel_num_t channel);
-void dma_enable_memory_increment_mode(DMA_TypeDef* dma, dma_channel_num_t channel);
-void dma_disable_memory_increment_mode(DMA_TypeDef* dma, dma_channel_num_t channel);
-void dma_set_peripheral_address(DMA_TypeDef* dma, dma_channel_num_t channel,
-                                uint32_t peripheral_address);
-void dma_set_memory_address(DMA_TypeDef* dma, dma_channel_num_t channel, uint32_t memory_address);
-void dma_set_number_of_data(DMA_TypeDef* dma, dma_channel_num_t channel, uint16_t number_of_data);
-
-dma_config_channel_buffer(DMA_TypeDef* dma, uint32_t* peripheral_address, uint32_t* buffer,
-                          uint32_t buffer_size, uint8_t channel);
-// dma_config(dma_config_t config)
+void     dma_config_channel(const dma_channel_config_t* config);
+void     dma_channel_enable(DMA_TypeDef* dma, uint8_t channel);
+void     dma_channel_disable(DMA_TypeDef* dma, uint8_t channel);
+uint16_t dma_channel_get_remaining(DMA_TypeDef* dma, uint8_t channel);
+uint8_t  dma_channel_transfer_complete(DMA_TypeDef* dma, uint8_t channel);
+void     dma_channel_clear_flags(DMA_TypeDef* dma, uint8_t channel);

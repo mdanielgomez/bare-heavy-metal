@@ -35,16 +35,16 @@ typedef enum
 
 typedef struct
 {
-    DMA_TypeDef* dma;
-    uint32_t*    peripheral_address;
-    uint32_t*    buffer;
-    uint32_t     buffer_size;
-    uint8_t      channel;
-    dma_minc_t   memory_inc_mode;
-    dma_pinc_t   peripheral_inc_mode;
-    dma_circ_t   circular_inc_mode;
+    DMA_TypeDef*    dma;
+    uintptr_t       peripheral_address;
+    uintptr_t       buffer;
+    uint16_t        buffer_size;
+    uint8_t         channel;
+    dma_minc_t      memory_inc_mode;
+    dma_pinc_t      peripheral_inc_mode;
+    dma_circ_t      circular_inc_mode;
     dma_direction_t direction;
-    uint8_t        transfer_complete_interrupt;
+    uint8_t         transfer_complete_interrupt;
 } dma_channel_config_t;
 
 void dma_channel_enable(DMA_TypeDef* dma, dma_channel_num_t channel);

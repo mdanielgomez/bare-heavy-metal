@@ -29,3 +29,17 @@ void dma_channel_disable(DMA_TypeDef* dma, uint8_t channel)
     dma_get_channel(dma, channel)->CCR &= ~1u;
 }
 
+uint16_t dma_channel_get_remaining(DMA_TypeDef* dma, uint8_t channel)
+{
+    return (uint16_t)dma_get_channel(dma, channel)->CNDTR;
+}
+
+uint8_t dma_channel_transfer_complete(DMA_TypeDef* dma, uint8_t channel)
+{
+    return (dma->ISR & (1u << (1u + (4u * (channel - 1u))))) != 0u;
+}
+
+void dma_channel_clear_flags(DMA_TypeDef* dma, uint8_t channel)
+{
+    dma->IFCR = 0x0fu << (4u * (channel - 1u));
+}

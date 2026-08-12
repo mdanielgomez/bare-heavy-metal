@@ -16,6 +16,7 @@ void gpio_configure_pin(GPIO_TypeDef* gpio, uint8_t pin, gpio_mode_t mode, gpio_
     }
 
     uint32_t register_setting = ((cnf << 2) | mode) << pin_offset;
+    *config_register &= ~(0x0fu << pin_offset);
     *config_register |= register_setting;
 }
 

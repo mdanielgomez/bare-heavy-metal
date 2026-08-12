@@ -18,3 +18,14 @@ void dma_config_channel(const dma_channel_config_t* config)
     dma_channel->CCR |= (config->direction << DMA_CCR_DIR_POS);
     dma_channel->CCR |= (config->transfer_complete_interrupt << DMA_CCR_TCIE_POS);
 }
+
+void dma_channel_enable(DMA_TypeDef* dma, uint8_t channel)
+{
+    dma_get_channel(dma, channel)->CCR |= 1u;
+}
+
+void dma_channel_disable(DMA_TypeDef* dma, uint8_t channel)
+{
+    dma_get_channel(dma, channel)->CCR &= ~1u;
+}
+

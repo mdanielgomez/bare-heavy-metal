@@ -1,10 +1,15 @@
 CC := arm-none-eabi-gcc
 CFLAGS := -mcpu=cortex-m3 -mthumb -O0 -ffreestanding -nostdlib -g
 CFLAGS += -I../common/inc
+CFLAGS += -Isrc/drivers
 TARGET := app
 OPENOCD_CFG := -f interface/stlink.cfg -f target/stm32f1x.cfg
 SRCS := \
-	$(wildcard src/*.c)
+	$(wildcard src/*.c) \
+	src/drivers/clock.c \
+	src/drivers/dma.c \
+	src/drivers/gpio.c \
+	src/drivers/uart.c
 
 OBJS := $(SRCS:.c=.o)
 

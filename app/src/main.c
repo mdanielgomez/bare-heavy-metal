@@ -1,7 +1,7 @@
 #include "stm32f103.h"
 #include "arm.h"
-
-#define UART_RX_BUFFER_SIZE 64
+#include "clock.h"
+#include "uart.h"
 
 void TIM2_IRQHandler()
 {
@@ -12,106 +12,42 @@ void TIM2_IRQHandler()
     }
 }
 
-void clock_init_72mhz_pclk1_36mhz(void)
+static uint8_t uart_rx_buffer[UART_RX_BUFFER_SIZE];
+static uint8_t uart_tx_buffer[UART_TX_BUFFER_SIZE];
+
+static uart_handle_t uart2 = {
+    .uart = USART2,
+    .config = {
+        .baud_rate  = 9600u,
+        .stop_bits  = UART_STOP_1,
+        .parity     = UART_PARITY_NONE,
+        .word_length = UART_WORD_8,
+        .mode       = UART_MODE_TX_RX,
+    },
+    .rx_gpio       = GPIOA,
+    .rx_gpio_pin   = 3u,
+    .tx_gpio       = GPIOA,
+    .tx_gpio_pin   = 2u,
+    .rx_buffer     = uart_rx_buffer,
+    .rx_buffer_size = sizeof(uart_rx_buffer),
+    .tx_buffer     = uart_tx_buffer,
+    .tx_buffer_size = sizeof(uart_tx_buffer),
+};
+
+static void echo_received_byte(uint8_t byte, void* context)
 {
-    RCC->CR |= (1 << 16);
-    while (!(RCC->CR & (1 << 17)))
-    {
-    }
-
-    FLASH_ACR |= (2 << 0);
-    FLASH_ACR |= (1 << 4);
-
-    RCC->CFGR &= ~((0xF << 4) | (0x7 << 8) | (0x7 << 11) | (1 << 16) | (0xF << 18));
-    RCC->CFGR |= (0b100 << 8);
-    RCC->CFGR |= (1 << 16);
-    RCC->CFGR |= (0b0111 << 18);
-
-    RCC->CR |= (1 << 24);
-    while (!(RCC->CR & (1 << 25)))
-    {
-    } // wait PLLRDY
-
-    RCC->CFGR &= ~(0b11 << 0);
-    RCC->CFGR |= (0b10 << 0);
-
-    while (((RCC->CFGR >> 2) & 0b11) != 0b10)
-    {
-    }
-}
-
-static volatile uint8_t uart_rx_buffer[64];
-
-void uart_write_char(char c)
-{
-    while (!(USART2->SR & (1 << 7)))
-    {
-        // wait for TXE
-    }
-
-    USART2->DR = c;
-}
-
-void uart_poll_rx(void)
-{
-    static uint32_t old_pos = 0;
-
-    uint32_t new_pos = UART_RX_BUFFER_SIZE - DMA1->CNDTR6;
-
-    while (old_pos != new_pos)
-    {
-        uint8_t byte = uart_rx_buffer[old_pos];
-
-        // Do something with byte
-        // For now, maybe echo it later using TX
-        uart_write_char(byte);
-
-        old_pos++;
-        if (old_pos >= UART_RX_BUFFER_SIZE)
-            old_pos = 0;
-    }
+    (void)uart_write_byte((uart_handle_t*)context, byte);
 }
 
 int main(void)
 {
-    clock_init_72mhz_pclk1_36mhz();
+    clock_init_72mhz();
     // Enable TIM2 Peripheral
     RCC->APB1ENR |= 1 << 0;
 
-    // Enable GPIOA, USART, and DMA Clock
+    // Enable GPIOA clock; uart_init enables USART and DMA clocks.
     RCC->APB2ENR |= 1 << 2;
-    RCC->APB1ENR |= 1 << 17;
-    RCC->AHBENR |= 1 << 0;
-
-    // Configure PA2 and PA3
-    GPIOA->CRL &= ~(0b1111 << 8); // Reset GPIOA2
-    GPIOA->CRL |= (0b1010 << 8);  // AF Push Pull, Output mode max 2 MHz
-
-    GPIOA->CRL &= ~(0b1111 << 12); // Reset GPIOA3
-    GPIOA->CRL |= (0b0100 << 12);  // Floating input mode
-
-    // Set Baud
-    USART2->BRR = 0xEA6;
-    USART2->CR1 = 0;
-    USART2->CR1 |= (1 << 3);
-    USART2->CR1 |= (1 << 2);
-    USART2->CR1 |= (1 << 13);
-
-    // Set up DMA
-    DMA1->CCR6 &= ~(1 << 0);
-    DMA1->CPAR6  = (uint32_t)&USART2->DR;
-    DMA1->CMAR6  = (uint32_t)uart_rx_buffer;
-    DMA1->CNDTR6 = UART_RX_BUFFER_SIZE;
-
-    DMA1->CCR6 = 0;
-    DMA1->CCR6 |= (1 << 7);
-    DMA1->CCR6 |= (1 << 5);
-
-    // Enable DMA on USART2
-    USART2->CR3 |= (1 << 6);
-
-    // Enable DMA
-    DMA1->CCR6 |= 1;
+    uart_init(&uart2);
 
     // Disable the timer
     TIM2->CR1 &= ~1;
@@ -147,7 +83,7 @@ int main(void)
     // Turn on LED with timer
     while (1)
     {
-        uart_poll_rx();
+        uart_process_receive(&uart2, echo_received_byte, &uart2);
     }
     return 0;
 }

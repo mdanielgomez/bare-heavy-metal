@@ -1,6 +1,13 @@
 #pragma once
 
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+
 #include "stm32f103.h"
+
+#define UART_RX_BUFFER_SIZE 128u
+#define UART_TX_BUFFER_SIZE 128u
 
 typedef enum
 {
@@ -52,13 +59,18 @@ typedef struct
 
     uint8_t* rx_buffer;
     uint16_t rx_buffer_size;
-    uint16_t rx_read_index;
+    uint16_t rx_tail;
 
     uint8_t*          tx_buffer;
     uint16_t          tx_buffer_size;
     volatile uint16_t tx_head;
     volatile uint16_t tx_tail;
+    volatile uint16_t tx_dma_length;
+    uint8_t           dma_rx_channel;
+    uint8_t           dma_tx_channel;
 } uart_handle_t;
+
+typedef void (*uart_rx_callback_t)(uint8_t byte, void* context);
 
 void uart_set_baud_rate(USART_TypeDef* uart, uint32_t brr);
 void uart_enable_transmit(USART_TypeDef* uart);
@@ -67,4 +79,7 @@ void uart_enable_uart(USART_TypeDef* uart);
 void uart_enable_dma(USART_TypeDef* uart);
 
 void uart_write_char(USART_TypeDef* uart, char c);
+bool uart_write_byte(uart_handle_t* handle, uint8_t byte);
+size_t uart_write(uart_handle_t* handle, const uint8_t* data, size_t length);
+size_t uart_process_receive(uart_handle_t* handle, uart_rx_callback_t callback, void* context);
 void uart_init(uart_handle_t* handle);

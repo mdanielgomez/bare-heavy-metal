@@ -77,7 +77,7 @@ typedef struct
 
 typedef enum
 {
-    DMA_CHANNEL_1 = 0,
+    DMA_CHANNEL_1 = 1,
     DMA_CHANNEL_2,
     DMA_CHANNEL_3,
     DMA_CHANNEL_4,
